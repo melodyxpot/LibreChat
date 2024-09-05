@@ -54,6 +54,7 @@ const chatV1 = async (req, res) => {
     promptPrefix,
     assistant_id,
     instructions,
+    endpointOption,
     thread_id: _thread_id,
     messageId: _messageId,
     conversationId: convoId,
@@ -283,7 +284,7 @@ const chatV1 = async (req, res) => {
     const { openai: _openai, client } = await getOpenAIClient({
       req,
       res,
-      endpointOption: req.body.endpointOption,
+      endpointOption,
       initAppClient: true,
     });
 
@@ -312,6 +313,10 @@ const chatV1 = async (req, res) => {
       body.additional_instructions = promptPrefix;
     }
 
+    if (typeof endpointOption.artifactsPrompt === 'string' && endpointOption.artifactsPrompt) {
+      body.additional_instructions = `${body.additional_instructions ?? ''}\n${endpointOption.artifactsPrompt}`.trim();
+    }
+
     if (instructions) {
       body.instructions = instructions;
     }
@@ -333,12 +338,12 @@ const chatV1 = async (req, res) => {
     };
 
     const addVisionPrompt = async () => {
-      if (!req.body.endpointOption.attachments) {
+      if (!endpointOption.attachments) {
         return;
       }
 
       /** @type {MongoFile[]} */
-      const attachments = await req.body.endpointOption.attachments;
+      const attachments = await endpointOption.attachments;
       if (attachments && attachments.every((attachment) => checkOpenAIStorage(attachment.source))) {
         return;
       }
@@ -382,6 +387,9 @@ const chatV1 = async (req, res) => {
 
       return files;
     };
+
+    /** @type {Promise<Run>|undefined} */
+    let userMessagePromise;
 
     const initializeThread = async () => {
       /** @type {[ undefined | MongoFile[]]}*/
@@ -439,7 +447,7 @@ const chatV1 = async (req, res) => {
       previousMessages.push(requestMessage);
 
       /* asynchronous */
-      saveUserMessage({ ...requestMessage, model });
+      userMessagePromise = saveUserMessage(req, { ...requestMessage, model });
 
       conversation = {
         conversationId,
@@ -583,7 +591,10 @@ const chatV1 = async (req, res) => {
     });
     res.end();
 
-    await saveAssistantMessage({ ...responseMessage, model });
+    if (userMessagePromise) {
+      await userMessagePromise;
+    }
+    await saveAssistantMessage(req, { ...responseMessage, model });
 
     if (parentMessageId === Constants.NO_PARENT && !_thread_id) {
       addTitle(req, {

@@ -71,6 +71,24 @@ export default {
   com_ui_unarchive: '取消封存',
   com_ui_unarchive_error: '取消封存對話時發生錯誤',
   com_ui_more_options: '更多',
+  com_ui_bookmarks: '書籤',
+  com_ui_bookmarks_rebuild: '重建',
+  com_ui_bookmarks_new: '新書籤',
+  com_ui_bookmark_delete_confirm: '你確定要刪除這個書籤嗎？',
+  com_ui_bookmarks_title: '標題',
+  com_ui_bookmarks_count: '計數',
+  com_ui_bookmarks_description: '描述',
+  com_ui_bookmarks_create_success: '書籤創建成功',
+  com_ui_bookmarks_update_success: '書籤更新成功',
+  com_ui_bookmarks_delete_success: '書籤刪除成功',
+  com_ui_bookmarks_create_error: '創建書籤時出錯',
+  com_ui_bookmarks_update_error: '更新書籤時出錯',
+  com_ui_bookmarks_delete_error: '刪除書籤時出錯',
+  com_ui_bookmarks_add_to_conversation: '添加到當前對話',
+  com_ui_accept: '我接受',
+  com_ui_decline: '我不同意',
+  com_ui_terms_and_conditions: '條款和條件',
+  com_ui_no_terms_content: '沒有條款和條件內容顯示',
   com_auth_error_login: '無法使用提供的資訊登入。請檢查您的登入資訊後重試。',
   com_auth_error_login_rl: '短時間內嘗試登入的次數過多。請稍後再試。',
   com_auth_error_login_ban: '由於違反我們的服務條款，您的帳號已被暫時停用。',
@@ -262,6 +280,7 @@ export default {
   com_nav_theme_system: '跟隨系統設定',
   com_nav_theme_dark: '深色',
   com_nav_theme_light: '淺色',
+  com_nav_font_size: '字體大小',
   com_nav_clear_all_chats: '清除所有對話',
   com_nav_confirm_clear: '確認清除',
   com_nav_close_sidebar: '關閉側邊選單',
@@ -281,6 +300,8 @@ export default {
   com_nav_help_faq: '說明與常見問題',
   com_nav_settings: '設定',
   com_nav_search_placeholder: '搜尋訊息',
+  com_nav_info_bookmarks_rebuild:
+    '如果書籤計數不正確，請重新構建書籤信息。書籤計數將被重新計算，數據將恢復到其正確狀態。',
   com_nav_setting_general: '一般',
   com_nav_setting_data: '資料控制',
   /* The following are AI translated */
@@ -328,6 +349,7 @@ export default {
   com_sidepanel_hide_panel: '隱藏側邊選單',
   com_sidepanel_attach_files: '附加檔案',
   com_sidepanel_manage_files: '管理檔案',
+  com_sidepanel_conversation_tags: '書籤',
   com_assistants_capabilities: '功能',
   com_assistants_knowledge: '知識',
   com_assistants_knowledge_info: '如果您在「知識」下上傳檔案，與您的助理的對話可能會包含檔案內容。',
@@ -504,7 +526,7 @@ export default {
   com_nav_change_picture: '更換圖片',
   com_nav_plugin_install: '安裝',
   com_nav_plugin_uninstall: '解除安裝',
-  com_nav_tool_add: '新增',
+  com_ui_add: '新增',
   com_nav_tool_remove: '移除',
   com_nav_tool_dialog: 'AI 工具',
   com_nav_tool_dialog_description: '必須儲存 Assistant 才能保留工具選擇。',
@@ -829,6 +851,62 @@ export const comparisons = {
   com_ui_more_options: {
     english: 'More',
     translated: '更多',
+  },
+  com_ui_bookmarks: {
+    english: 'Bookmarks',
+    translated: '書籤',
+  },
+  com_ui_bookmarks_rebuild: {
+    english: 'Rebuild',
+    translated: '重建',
+  },
+  com_ui_bookmarks_new: {
+    english: 'New Bookmark',
+    translated: '新書籤',
+  },
+  com_ui_bookmark_delete_confirm: {
+    english: 'Are you sure you want to delete this bookmark?',
+    translated: '你確定要刪除這個書籤嗎？',
+  },
+  com_ui_bookmarks_title: {
+    english: 'Title',
+    translated: '標題',
+  },
+  com_ui_bookmarks_count: {
+    english: 'Count',
+    translated: '計數',
+  },
+  com_ui_bookmarks_description: {
+    english: 'Description',
+    translated: '描述',
+  },
+  com_ui_bookmarks_create_success: {
+    english: 'Bookmark created successfully',
+    translated: '書籤創建成功',
+  },
+  com_ui_bookmarks_update_success: {
+    english: 'Bookmark updated successfully',
+    translated: '書籤更新成功',
+  },
+  com_ui_bookmarks_delete_success: {
+    english: 'Bookmark deleted successfully',
+    translated: '書籤刪除成功',
+  },
+  com_ui_bookmarks_create_error: {
+    english: 'There was an error creating the bookmark',
+    translated: '創建書籤時出錯',
+  },
+  com_ui_bookmarks_update_error: {
+    english: 'There was an error updating the bookmark',
+    translated: '更新書籤時出錯',
+  },
+  com_ui_bookmarks_delete_error: {
+    english: 'There was an error deleting the bookmark',
+    translated: '刪除書籤時出錯',
+  },
+  com_ui_bookmarks_add_to_conversation: {
+    english: 'Add to current conversation',
+    translated: '添加到當前對話',
   },
   com_auth_error_login: {
     english:
@@ -1626,6 +1704,12 @@ export const comparisons = {
     english: 'Search messages',
     translated: '搜尋訊息',
   },
+  com_nav_info_bookmarks_rebuild: {
+    english:
+      'If the bookmark count is incorrect, please rebuild the bookmark information. The bookmark count will be recalculated and the data will be restored to its correct state.',
+    translated:
+      '如果書籤計數不正確，請重新構建書籤信息。書籤計數將被重新計算，數據將恢復到其正確狀態。',
+  },
   com_nav_setting_general: {
     english: 'General',
     translated: '一般',
@@ -1805,6 +1889,10 @@ export const comparisons = {
   com_sidepanel_manage_files: {
     english: 'Manage Files',
     translated: '管理檔案',
+  },
+  com_sidepanel_conversation_tags: {
+    english: 'Bookmarks',
+    translated: '書籤',
   },
   com_assistants_capabilities: {
     english: 'Capabilities',
@@ -2479,7 +2567,7 @@ export const comparisons = {
     english: 'Uninstall',
     translated: '解除安裝',
   },
-  com_nav_tool_add: {
+  com_ui_add: {
     english: 'Add',
     translated: '新增',
   },
